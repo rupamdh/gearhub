@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="w-screen h-screen flex items-center justify-center">
+    <div class="max-w-2xl w-4/12 mx-auto shadow shadow-gray-300 p-7">
+        <h2 class="text-center text-2xl font-bold mb-4">Login</h2>
+        <form method="post" novalidate="true">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="text-red-600 text-center font-semibold mb-5">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div>
+                {% for field in form %}
+                    <div class="login-form">
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-red-600">
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="bg-blue-600 text-white px-8 py-2 block mx-auto">Login</button>
+        </form>
+    </div>
+</div>
+    
+{% endblock main %}
+    
